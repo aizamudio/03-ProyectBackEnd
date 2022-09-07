@@ -110,6 +110,6 @@ const server = createServer(function (request, response) {
   //  response.end();
 });
 
-server.listen(8080, function() {
-  console.log('Servidor escuchando en el puerto 8080');
+server.listen(process.env.PORT || 8080, function() {
+  console.log('Servidor escuchando peticiones');
 });
