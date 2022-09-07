@@ -26,27 +26,36 @@ const UsuarioSchema = new Schema({
 
 const EmisoraSchema = new Schema ({
   claveEmisora: { type: String, maxlength: 20, unique: true },
-  emisora: { type: String, maxlength: 20, unique: true },
+  emisora: { type: String, maxlength: 100, unique: true },
   bolsa: { type: String, maxlength: 100, minlength:3 }
+});
+
+const TickerSchema = new Schema ({
+  claveTicker: { type: String, maxlength: 20, unique: true },
+  nombreTicker: { type: String, maxlength: 100, unique: true },
+  emisora: { type: String, maxlength: 20, minlength:3 }
+});
+
+const PortafolioSchema = new Schema ({
+  clavePortafolio: { type: String, maxlength: 20, unique: true },
+  RFCusuario: { type: String, maxlength: 14 },
+  descripción: { type: String, maxlength: 100, minlength:3 }
 });
 
 // 3. Crear instancias de los schemas
 
-const Usuario10 = model('usuarios', UsuarioSchema);
+  const Portafolio7 = model('portafolios', PortafolioSchema);
 
-new Usuario10({
-    nombre: 'Luis',
-    aPaterno: 'Solis',
-    aMaterno: 'Ramirez',
-    correo: 'luissolis78@hotmail.com',
-    rfc: 'SORL871012C08',
-    domicilio: 'Tlacotalpan 525, Col. Roma Sur, Cuauhtemoc'
-}).save(function (err, document) {
-    if (err) {
-      console.error('No se pudo registrar en la base de datos');
-      console.error(err);
-    } else {
-      console.log('Documento insertado en la base de datos');
-      console.log(document);
-    }
-  });
+  new Portafolio7({
+    clavePortafolio: 'por00007',
+    RFCusuario: 'GUDG850312JK1',
+    descripción: 'Portafolio diversificado'
+  }).save(function (err, document) {
+      if (err) {
+        console.error('No se pudo registrar en la base de datos');
+        console.error(err);
+      } else {
+        console.log('Documento insertado en la base de datos');
+        console.log(document);
+      }
+    });
