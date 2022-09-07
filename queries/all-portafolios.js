@@ -76,38 +76,25 @@ const PortaTickersModel = model('portatickers', portaTickersSchema);
 
 const server = createServer(function (request, response) {
   if (request.url === '/portafolios') {
-    PortafolioModel.find().populate('RFCusuario').exec(function (err, portafolios) {
+    PortafolioModel.find(function (err, portafolios) {
       if (err) {
         response.write('No se puede procesar tu solicitud');
-        console.error(err);
-        response.end();
-      } else {
-        response.write(JSON.stringify(portafolios));
-        response.end();
-      }
-    } );
-  } else if (request.url.startsWith('/portafolios/usuarios/')) {
-    const split = request.url.split('/');
-    const userId = split[3];
-    console.log(userId);
-    PortafolioModel.find({ RFCusuario: Types.ObjectId(userID) }, function (err, portafolios){
-      if (err) {
-        response.write('Ocurrió un error al procesar tu solicitud');
-        console.error(err);
         response.end();
       } else {
         response.write(JSON.stringify(portafolios));
         response.end();
       }
     });
+  } else if (request.url.startsWith('/portafolios/usuarios/')) {
+
   } else {
     response.write('Error 404: Elemento no encontrado');
     response.end();
   }
 
-  //  console.log(request.url);
-  //  response.write('Hello World');
-  //  response.end();
+//  console.log(request.url);
+//  response.write('Hello World');
+//  response.end();
 });
 
 server.listen(8080, function() {
